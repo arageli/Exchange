@@ -29,16 +29,19 @@ public class ConvertServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("currencyForExchange"));
 		
 		DataAccess data = null;
-		String currencyName = "";
+		ArrayList<String> names = null;
 		ArrayList<Double> rateOfUAH = null;
 
 			data = new DataAccess();
-			currencyName = data.getCurrencyName(id);
+			names = data.getCurrencyNames();
+			
+			System.out.println(names.toString());
+			
 			rateOfUAH = data.ratesOfUAH();
 
-		Currency currency = new Currency(id, currencyName, rateOfUAH, amountToConvert);
+		Currency currency = new Currency(id, names, rateOfUAH, amountToConvert);
 		
-		System.out.println(currency.getId() + " " + currency.getName() + " " + currency.getRateOfUAH().toString() + " " + currency.getAmount());
+		System.out.println(currency.getId() + " " + currency.getName().toString() + " " + currency.getRateOfUAH().toString() + " " + currency.getAmount());
 		
 		ArrayList<Double> results = new ArrayList<Double>();
 		Converter conv = new Converter();
