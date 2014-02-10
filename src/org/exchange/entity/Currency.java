@@ -1,9 +1,11 @@
 package org.exchange.entity;
 
+import java.util.ArrayList;
+
 public class Currency {
 	private int id;
 	private String name;
-	private double rateOfUAH;
+	private ArrayList<Double> rateOfUAH;
 	private double amount;
 	public Currency(String name) {
 		this.name = name;
@@ -14,7 +16,8 @@ public class Currency {
 	
 	}
 	
-	public Currency(int id, String name, double rateOfUAH, double amount) {
+	public Currency(int id, String name, ArrayList<Double> rateOfUAH, double amount) {
+		this.id = id;
 		this.name = name;
 		this.rateOfUAH = rateOfUAH;
 		this.amount = amount;
@@ -28,11 +31,12 @@ public class Currency {
 		this.name = name;
 	}
 
-	public double getRate() {
+	public ArrayList<Double> getRateOfUAH() {
 		return rateOfUAH;
 	}
 
-	public void setRate(double rateOfUAH) {
+
+	public void setRateOfUAH(ArrayList<Double> rateOfUAH) {
 		this.rateOfUAH = rateOfUAH;
 	}
 

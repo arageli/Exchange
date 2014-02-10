@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="org.exchange.entity.Currency"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -12,19 +13,19 @@
 <%
 	Currency currency = (Currency)request.getAttribute("currency");
 	String name = currency.getName();
-	double rate = currency.getRate();
-	double amount = currency.getAmount();
-	Double result =(Double)request.getAttribute("result");
+	
+	ArrayList<Double> rateOfUAH = (ArrayList<Double>)request.getAttribute("rateOfUAH");
+	ArrayList<Double> results = (ArrayList<Double>)request.getAttribute("results");
+	double result = results.get(0);
 %>
 
-<div align="left">
-		Currency to convert : <%=name%>
-		Current rate of UAH :<%=rate%>
-		Amount to convert: <%=amount %>
-</div>
 	
 	<div align="left">
-	<div>Results : </div><input type="text" value="<%=result.doubleValue()%>" > <a><%=name %></a> <input type="text" size ="4" value="<%=rate%>">
+	<div>Results : </div><input type="text" value="<%= results.get(0) %>" > <a><%=name %></a> <input type="text" size ="4" value="<%=rateOfUAH.get(0)%>">
+						 <br>
+						 <input type="text" value="<%= results.get(1) %>" > <a><%=name %></a> <input type="text" size ="4" value="<%=rateOfUAH.get(1)%>">
+						 <br>
+						 <input type="text" value="<%= results.get(2) %>" > <a><%=name %></a> <input type="text" size ="4" value="<%=rateOfUAH.get(2)%>">
 	</div>
 	
 </body>

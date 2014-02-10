@@ -25,7 +25,7 @@
 								 	<option value="1">USD
 								 	<option value="2">EU
 								 	<option value="3">RUB
-								 	<!-- <option value="4">UA -->
+								 	<option value="4">UA
 								 </select>
 		<input type="submit" value="Convert">
 		</form> 

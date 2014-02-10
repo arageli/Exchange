@@ -1,6 +1,7 @@
 package org.exchange.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,37 +30,25 @@ public class ConvertServlet extends HttpServlet {
 		
 		DataAccess data = null;
 		String currencyName = "";
-		double currencyRate = 0;
-		switch (id) {
-		case 1:
+		ArrayList<Double> rateOfUAH = null;
+
 			data = new DataAccess();
 			currencyName = data.getCurrencyName(id);
-			currencyRate = data.getCurrencyRate(id);
-			break;
-		case 2:
-			data = new DataAccess();
-			currencyName = data.getCurrencyName(id);
-			currencyRate = data.getCurrencyRate(id);
-			break;
-		case 3:
-			data = new DataAccess();
-			currencyName = data.getCurrencyName(id);
-			currencyRate = data.getCurrencyRate(id);
-			break;
-		case 4:
-			data = new DataAccess();
-			currencyName = data.getCurrencyName(id);
-			currencyRate = data.getCurrencyRate(id);
-			break;
-		}
+			rateOfUAH = data.ratesOfUAH();
+
+		Currency currency = new Currency(id, currencyName, rateOfUAH, amountToConvert);
 		
-		Currency currency = new Currency(id, currencyName, currencyRate, amountToConvert);
-		double result;	
+		System.out.println(currency.getId() + " " + currency.getName() + " " + currency.getRateOfUAH().toString() + " " + currency.getAmount());
+		
+		ArrayList<Double> results = new ArrayList<Double>();
 		Converter conv = new Converter();
-		result = conv.calculate(currency);
 		
+		results = conv.calculate(currency);
+		System.out.println(results.toString());
+		
+		request.setAttribute("rateOfUAH", rateOfUAH);
 		request.setAttribute("currency", currency);
-		request.setAttribute("result", result);
+		request.setAttribute("results", results);
 		
 		String url = "/result.jsp";
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);

@@ -4,13 +4,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-
-import oracle.sql.DATE;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class DataAccess {
 	
@@ -77,7 +73,32 @@ public class DataAccess {
 
 		}
 	}
+	
+	public ArrayList<Double> ratesOfUAH () {
+		ArrayList<Double> rates =  new ArrayList<Double>();;
 		
+		Connection connection = getConnection();
+		try{
+		String sql = "SELECT * FROM rate";
+		
+		PreparedStatement statement = (PreparedStatement) connection.prepareStatement(sql);
+		ResultSet result = statement.executeQuery();
+		
+		while (result.next()) {
+			rates.add(result.getDouble("rate"));
+		}
+		}catch(Exception e){
+			
+		}finally{
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return rates;
+	}
+	
 	public double getCurrencyRate (int id) {
 		double rate = 0;
 		Connection connection = getConnection();
