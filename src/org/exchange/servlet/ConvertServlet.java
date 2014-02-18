@@ -40,37 +40,44 @@ public class ConvertServlet extends HttpServlet {
 
 		Converter conv = new Converter();
 		results = conv.calculate(currency);
+
 		DecimalFormat df = new DecimalFormat();
-		
-		
-		
-		String resultUSD = df.format(results.get(0));
-		String resultEU = df.format(results.get(1));
-		String resultRUB = df.format(results.get(2));
-		
 		StringBuilder str = new StringBuilder();
-		str.append(resultUSD);
-		str.append("|");
-		str.append(resultEU);
-		str.append("|");
-		str.append(resultRUB);
-		str.append("|");
-		str.append(names.get(0));
-		str.append("|");
-		str.append(names.get(1));
-		str.append("|");
-		str.append(names.get(2));
-		str.append("|");
-		str.append(rateOfUAH.get(0));
-		str.append("|");
-		str.append(rateOfUAH.get(1));
-		str.append("|");
-		str.append(rateOfUAH.get(2));
+		
+		countResultStr(results, df, str);
+		
+		getCurrencyNamesStr(names, results, str);
+		
+		getRateOfUahStr(rateOfUAH, results, str);
 		
 		response.setContentType("text/html");
 		response.getWriter().println(str);
 
 		System.out.println(str);
+	}
+
+	private void getRateOfUahStr(ArrayList<Double> rateOfUAH,
+			ArrayList<Double> results, StringBuilder str) {
+		for (int i=0; i<results.size()-1;i++) {
+			str.append(rateOfUAH.get(i));
+			str.append("|");
+		}
+	}
+
+	private void getCurrencyNamesStr(ArrayList<String> names,
+			ArrayList<Double> results, StringBuilder str) {
+		for (int i=0; i<results.size()-1;i++) {
+			str.append(names.get(i));
+			str.append("|");
+		}
+	}
+
+	private void countResultStr(ArrayList<Double> results, DecimalFormat df,
+			StringBuilder str) {
+		for (int i=0; i<results.size()-1;i++) {
+			str.append(df.format(results.get(i)));
+			str.append("|");
+		}
 	}
 
 	@Override
