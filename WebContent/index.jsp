@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<div align="center">
+	<div >
 		Input amount to convert: <input type="text" value="0.00" id="amount"
 			name="amount"> UAH 
 	<button type="button" onclick=" sendDataToServer()">Convert</button>

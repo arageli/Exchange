@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Downloader {
-
 	
 	private String fileName = "currencyRate";
 
@@ -24,7 +23,7 @@ public class Downloader {
 
 	public File downloadFile(String url) throws IOException {
 		
-		String dir = "D:/trainingWorkspace/Exchange/WebContent/resources/CurrencyRateNationalBank/";
+		String dir = "D:/trainingWorkspace/Exchange/WebContent/resources/CurrencyRate/";
 		System.out.println("Start download");
 		BufferedInputStream inputStream = null;
 		FileOutputStream outputFile = null;
@@ -32,7 +31,7 @@ public class Downloader {
 		File file = null;
 
 		if (file == null) {
-			file = new File(dir + fileName + ".json");
+			file = new File(dir + fileName + ".xml");
 		}
 		
 		inputStream = new BufferedInputStream(new URL(url).openStream());

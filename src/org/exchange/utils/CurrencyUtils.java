@@ -1,8 +1,5 @@
 package org.exchange.utils;
 
-import javax.xml.crypto.Data;
-
-import org.exchange.dao.DataAccess;
 
 public class CurrencyUtils {
 

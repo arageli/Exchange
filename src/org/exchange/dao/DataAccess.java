@@ -4,6 +4,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
+
+import org.exchange.utils.XmlParser;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -74,21 +77,21 @@ public class DataAccess {
 
 	public ArrayList<String> getCurrencyNames() {
 		ArrayList<String> names = new ArrayList<String>();
-		
+
 		Connection connection = getConnection();
-		
+
 		try {
 			String sql = "SELECT * FROM currency";
 			PreparedStatement statement = (PreparedStatement) connection
 					.prepareStatement(sql);
 			ResultSet result = statement.executeQuery();
-			
+
 			while (result.next()) {
 				names.add(result.getString(2));
 			}
-		}catch (Exception e) {
-			
-		}finally{
+		} catch (Exception e) {
+
+		} finally {
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -144,21 +147,29 @@ public class DataAccess {
 		return rate;
 	}
 
-	// public void insertData() throws ClassNotFoundException, SQLException {
-	//
-	// Connection connnection = getConnection();
-	//
-	// String sql =
-	// "INSERT INTO currencydb.currency ( id, name) VALUES ( ?, ?)";
-	//
-	// PreparedStatement statement = (PreparedStatement) connnection
-	// .prepareStatement(sql);
-	//
-	// statement.setInt(1, 3);
-	// statement.setString(2, "RUB");
-	//
-	// statement.executeUpdate();
-	//
-	// }
+	XmlParser xmlParser = new XmlParser();
+	private String filePath = "D:/trainingWorkspace/Exchange/WebContent/resources/CurrencyRate/currencyRate.xml";
+	private Map<String, String> rates = xmlParser.getRatesOfUah(filePath);
+	
+	public void insertData() throws ClassNotFoundException, SQLException {
+
+		Connection connnection = getConnection();
+
+		String sql = "INSERT INTO currencydb.currency ( id, name) VALUES ( ?, ?)";
+
+		PreparedStatement statement = (PreparedStatement) connnection
+				.prepareStatement(sql);
+
+		statement.setInt(1, 3);
+		statement.setString(2, "RUB");
+
+		statement.executeUpdate();
+
+	}
+	
+	public void outputRates() {
+		System.out.println(rates.toString());
+	}
+	
 
 }
