@@ -3,7 +3,7 @@
   <display-name>Exchange</display-name>
   <description>Web site for currency exchange </description>
   
-  <servlet>
+<servlet>
     <servlet-name>ConvertServlet</servlet-name>
     <servlet-class>org.exchange.servlet.ConvertServlet</servlet-class>
   </servlet>

@@ -19,6 +19,12 @@ public class Currency {
 		this.amount = amount;
 	}
 	
+	public Currency(ArrayList<String> name, ArrayList<Double> rateOfUAH, double amount) {
+		this.name = name;
+		this.rateOfUAH = rateOfUAH;
+		this.amount = amount;
+	}
+	
 	public ArrayList<String> getName() {
 		return name;
 	}

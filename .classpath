@@ -13,9 +13,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="D:/Install/jackcon library for parsin JSON/jackson-annotations-2.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/Install/jackcon library for parsin JSON/jackson-core-2.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/Install/jackcon library for parsin JSON/jackson-databind-2.0.1.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/MySQL/Connector J 5.1.28/mysql-connector-java-5.1.28-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
