@@ -24,7 +24,7 @@ public class XmlParser {
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(file);
-			String nameOfBank = "CityCommerceBank";
+			String nameOfBank = "ªÂÐÎ";
 			doc.getDocumentElement().normalize();
 
 			NodeList nList = doc.getElementsByTagName("organization");
@@ -37,7 +37,7 @@ public class XmlParser {
 							.getFirstChild();
 
 					String currentBank = elementTitle.getAttribute("value");
-					if (currentBank.equals(nameOfBank)) {
+			//		if (currentBank.equals(nameOfBank)) {
 						Element elementCurrencies = (Element) elementOrganization
 								.getLastChild();
 						NodeList listOfRates = elementCurrencies
@@ -47,6 +47,7 @@ public class XmlParser {
 							Node rateNode = listOfRates.item(i);
 							if (rateNode.getNodeType() == Node.ELEMENT_NODE) {
 								Element elementC = (Element) rateNode;
+								
 								if (elementC.getAttribute("id").equals("USD")) {
 									rateOfUAh.put(elementC.getAttribute("id"),
 											elementC.getAttribute("br"));
@@ -61,7 +62,7 @@ public class XmlParser {
 								}
 							}
 						}
-					}
+					//}
 				}
 			}
 		} catch (Exception e) {
