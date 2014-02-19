@@ -44,10 +44,8 @@ public class ConvertServlet extends HttpServlet {
 		DecimalFormat df = new DecimalFormat();
 		StringBuilder str = new StringBuilder();
 		
-		countResultStr(results, df, str);
-		
+		getCountResultStr(results, df, str);
 		getCurrencyNamesStr(names, results, str);
-		
 		getRateOfUahStr(rateOfUAH, results, str);
 		
 		response.setContentType("text/html");
@@ -72,7 +70,7 @@ public class ConvertServlet extends HttpServlet {
 		}
 	}
 
-	private void countResultStr(ArrayList<Double> results, DecimalFormat df,
+	private void getCountResultStr(ArrayList<Double> results, DecimalFormat df,
 			StringBuilder str) {
 		for (int i=0; i<results.size()-1;i++) {
 			str.append(df.format(results.get(i)));

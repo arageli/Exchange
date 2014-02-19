@@ -16,15 +16,14 @@ public class XmlParser {
 
 	private Map<String, String> rateOfUAh;
 
-	public Map<String, String> getRatesOfUah(String filePath) {
+	public Map<String, String> getRatesOfUah(File file) {
 		try {
 			rateOfUAh = new LinkedHashMap<String, String>();
 
-			File fXmlFile = new File(filePath);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
+			Document doc = dBuilder.parse(file);
 			String nameOfBank = "CityCommerceBank";
 			doc.getDocumentElement().normalize();
 

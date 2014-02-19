@@ -146,15 +146,16 @@ public class DataAccess {
 		}
 		return rate;
 	}
-
-	XmlParser xmlParser = new XmlParser();
-	private String filePath = "D:/trainingWorkspace/Exchange/WebContent/resources/CurrencyRate/currencyRate.xml";
-	private Map<String, String> rates = xmlParser.getRatesOfUah(filePath);
+	
+	public void updateCurrencyRates (Map<String, String> rates) {
+		System.out.println(rates.toString());
+	}
+	
 	
 	public void insertData() throws ClassNotFoundException, SQLException {
 
 		Connection connnection = getConnection();
-
+		
 		String sql = "INSERT INTO currencydb.currency ( id, name) VALUES ( ?, ?)";
 
 		PreparedStatement statement = (PreparedStatement) connnection
@@ -167,9 +168,9 @@ public class DataAccess {
 
 	}
 	
-	public void outputRates() {
+	public void outputRates(Map<String, String> rates) {
 		System.out.println(rates.toString());
 	}
-	
 
+	
 }

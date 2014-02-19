@@ -47,6 +47,7 @@ public class Downloader {
 		
 		outputFile.flush();
 		outputFile.close();
+		
 		System.out.println("Finish download");
 		return file;
 		}
