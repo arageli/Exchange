@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
-import org.exchange.utils.XmlParser;
-
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+
+
 
 public class DataAccess {
 
@@ -23,13 +23,115 @@ public class DataAccess {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			con = (Connection) DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/currencydb", "root", "root");
+					"jdbc:mysql://localhost:3306/currencys_data", "root", "root");
+			System.out.println("connection ok");
 		} catch (Exception e) {
 
 		}
 		return con;
 	}
 
+	
+	private int getIdFromCurrency () {
+		int id = 0;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet result = null;
+		String sql = "SELECT id FROM currencys_data.currency";
+		
+		try {
+			connection = getConnection();
+			System.out.println("sql");
+			preparedStatement =  (PreparedStatement) connection.prepareStatement(sql);
+			
+			result = preparedStatement.executeQuery();
+			while (result.next()) {
+				id = result.getInt("id");
+			}
+			System.out.println(id);
+		} catch (SQLException e) {
+			System.out.println("Erro: in getIdFromCurrencytable");
+		}finally {
+			
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return id;
+		
+	}
+	
+	public void updateCurrencysList (Map<String, String> rates) {
+		
+		int id = getIdFromCurrency();
+		
+		
+		Connection connection = null;
+		java.sql.PreparedStatement preparedStatement = null;
+		
+		System.out.println(rates.toString());
+		
+		String updateSql = "UPDATE `currencys_data`.`currency` SET `id` = 1,`currency_name` = 'RUB' WHERE `id` = 1;";
+		String insertSql = "INSERT INTO currencys_data.currency VALUES ();";
+		
+		try{
+			connection = getConnection();
+			if (id>0) {
+			preparedStatement =  connection.prepareStatement(updateSql);
+			}else {
+				preparedStatement =  connection.prepareStatement(insertSql);
+			}
+			preparedStatement.executeUpdate();
+			
+			System.out.println("Rates is updated to db!");
+		}catch(SQLException e) {
+			System.out.println("SQLException");
+		}finally {
+			if (preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+ 
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	
+//		private Connection getConnection() {
+//		Connection con = null;
+//		try {
+//			Class.forName("com.mysql.jdbc.Driver");
+//
+//			con = (Connection) DriverManager.getConnection(
+//					"jdbc:mysql://localhost:3306/currencydb", "root", "root");
+//		} catch (Exception e) {
+//
+//		}
+//		return con;
+//	}
+	
+	
+	
+	
+	
 	public void dataAccess() throws Exception {
 
 		Connection con = getConnection();
@@ -146,11 +248,6 @@ public class DataAccess {
 		}
 		return rate;
 	}
-	
-	public void updateCurrencyRates (Map<String, String> rates) {
-		System.out.println(rates.toString());
-	}
-	
 	
 	public void insertData() throws ClassNotFoundException, SQLException {
 

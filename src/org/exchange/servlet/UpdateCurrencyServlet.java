@@ -42,7 +42,8 @@ public class UpdateCurrencyServlet extends HttpServlet {
 		if (updateCurrencyRates == true) {
 			File file = downloader.downloadFile(url);
 			Map<String, String> rates = xmlParser.getRatesOfUah(file);
-			data.outputRates(rates);
+//			data.outputRates(rates);
+			data.updateCurrencysList(rates);
 			
 		}
 	}

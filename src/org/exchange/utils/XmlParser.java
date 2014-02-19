@@ -24,7 +24,7 @@ public class XmlParser {
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(file);
-			String nameOfBank = "ªÂÐÎ";
+		//	String nameOfBank = "ªÂÐÎ";
 			doc.getDocumentElement().normalize();
 
 			NodeList nList = doc.getElementsByTagName("organization");
@@ -33,10 +33,6 @@ public class XmlParser {
 				Node nNode = nList.item(temp);
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element elementOrganization = (Element) nNode;
-					Element elementTitle = (Element) elementOrganization
-							.getFirstChild();
-
-					String currentBank = elementTitle.getAttribute("value");
 			//		if (currentBank.equals(nameOfBank)) {
 						Element elementCurrencies = (Element) elementOrganization
 								.getLastChild();
